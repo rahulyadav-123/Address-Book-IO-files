@@ -1,6 +1,7 @@
 package com.bridgelab.addressbook;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -126,7 +127,7 @@ public class AddressBook {
 	        System.out.println("Enter Name of City to get Contact List : ");
 	        String city = sc.next();
 	            System.out.print("\nContact list of persons across '"+city+"' is");
-	            list.stream().filter(contactList -> contactList.getCity().equals(city)||contactList.getState().equals(nameCityState)).forEach(contactList -> {
+	            list.stream().filter(contactList -> contactList.getCity().equals(city)||contactList.getState().equals(city)).forEach(contactList -> {
 	                System.out.println(contactList.getFirstName()+" "+contactList.getLastName());
 	            });
 	    }
@@ -135,10 +136,11 @@ public class AddressBook {
 	        System.out.println("Enter Name of State to get Contact List : ");
 	        String state = sc.next();
 	            System.out.print("\nContact list of persons across '"+state+"' is");
-	            list.stream().filter(contactList -> contactList.getCity().equals(state)||contactList.getState().equals(nameCityState)).forEach(contactList -> {
+	            list.stream().filter(contactList -> contactList.getCity().equals(state)||contactList.getState().equals(state)).forEach(contactList -> {
 	                System.out.println(contactList.getFirstName()+" "+contactList.getLastName());
 	            });
 	    }
+	 
 	 
 	public void getPersonNameByState(String State) {
         List<ContactPerson> result  = list.stream().filter(p ->p.getState().equals(State)).collect(Collectors.toList());
@@ -154,6 +156,7 @@ public class AddressBook {
             System.out.println("First Name: "+contact.getFirstName());
         }
     }
+    
     public void countList() {
         System.out.println("Enter Name of City or State to get count of Contacts across city or state");
         String nameCityState = sc.next();
@@ -162,5 +165,12 @@ public class AddressBook {
             result.count++;
         });
         System.out.println("Number of contact persons in "+nameCityState+" is : "+result.count);
+    }
+    
+    public void sortByName() {
+    	List<ContactPerson> result  = list.stream().sorted(Comparator.comparing(ContactPerson::getFirstName)).collect(Collectors.toList());
+    	for(ContactPerson contact: result){
+            System.out.println(contact.toString());
+        }
     }
 }
