@@ -154,4 +154,13 @@ public class AddressBook {
             System.out.println("First Name: "+contact.getFirstName());
         }
     }
+    public void countList() {
+        System.out.println("Enter Name of City or State to get count of Contacts across city or state");
+        String nameCityState = sc.next();
+        var result = new Object() {int count=0;};
+        list.stream().filter(contactList -> contactList.getCity().equals(nameCityState)||contactList.getState().equals(nameCityState)).forEach(contactList -> {
+            result.count++;
+        });
+        System.out.println("Number of contact persons in "+nameCityState+" is : "+result.count);
+    }
 }
