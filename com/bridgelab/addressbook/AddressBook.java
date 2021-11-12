@@ -63,9 +63,14 @@ public class AddressBook {
 		}
 	}
 	
-	public static void main(String[] args) {
-		AddressBook addressBook = new AddressBook();
-		addressBook.AddContact();
-		addressBook.editContact();
+	public void deleteContact() {
+		System.out.println("Enter the name of the person to delete the contact :");
+		String deleteName = sc.next();
+		for(int i = 0; i< list.size(); i++) {
+			String name = list.get(i).getFirstName();
+			if(name.equalsIgnoreCase(deleteName)) {
+				list.remove(i);
+			}
+		}
 	}
 }
