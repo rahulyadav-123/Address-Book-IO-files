@@ -2,13 +2,15 @@ package com.bridgelab.addressbook;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AddressBook {
 	private static Scanner scan = new Scanner(System.in);
-    ArrayList<ContactPerson> personList = new ArrayList<>();
+    static ArrayList<ContactPerson> personList = new ArrayList<>();
     Map<String,ArrayList<ContactPerson>> addressBook = new HashMap<String, ArrayList<ContactPerson>>();
 
     public void addDetails() {
@@ -248,5 +250,63 @@ public class AddressBook {
             addressBook.get(name).stream().sorted(Comparator.comparing(ContactPerson::getZip))
                     .collect(Collectors.toList()).forEach(person -> System.out.println(person.toString()));
         });
+    }
+    
+    public static void main(String[] args) {
+    	Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome to Address Book Program");
+        AddressBook addressBook = new AddressBook();
+        boolean choice = true;
+        while (choice) {
+            System.out.println("\nChoose the option:\nPress '1' for Add Contact Details\nPress '2' for Edit Contact Deatils"
+                    + "\nPress '3' for Delete Contact Details\nPress '4' for Show Contact Details\nPress '5' for Contact list by City State"
+                    + "\nPress '6' for Show Contact list of Persons\nPress '7' for Count of contacts by City State\nPress '8' for Sort Contacts By Name"
+                    + "\nPress '9' File Read and write operation"
+                    + "\nPress '0' for Exit");
+            int option = scan.nextInt();
+            switch (option) {
+                case 0:
+                    choice = false;
+                    System.out.println("Exited out of AddressBook");
+                    break;
+                case 1:
+                    addressBook.addDetails();
+                    break;
+                case 2:
+                    addressBook.editDetails();
+                    break;
+                case 3:
+                    addressBook.deleteDetails();
+                    break;
+                case 4:
+                    addressBook.showDetails();
+                    break;
+                case 5:
+                    addressBook.contactBycity();
+                    break;
+                case 6:
+                    addressBook.displayContacts();
+                    break;
+                case 7:
+                    addressBook.contactsCount();
+                    break;
+                case 8:
+                    addressBook.sorting();
+                    break;
+                case 9: 
+                    File_read_and_write();
+                break;   
+                default:
+                    System.out.println("Please enter valid input");
+            }
+        }
+    }
+	
+	private static void File_read_and_write() {
+        AddressBookIO.createfile();
+		String input = personList.toString();
+        AddressBookIO.add_details_to_file(input);
+        AddressBookIO addressBookIO = new AddressBookIO();
+		addressBookIO.read_details_to_file();
     }
 }
