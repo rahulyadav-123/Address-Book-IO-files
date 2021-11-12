@@ -6,50 +6,49 @@ import java.util.Scanner;
 
 public class AddressBookMain {
 	
-	public void choose() {
-        MultipleAddressBook multiAddressBook = new MultipleAddressBook();
-        while (true) {
-            System.out.println("Enter \n 1. To add The new AddressBook\n 2. To do AddressBook functions\n " +
-                    "3. To delete the AddressBook\n 4. To Print the AddressBook\n 5. To Print the contacts in AddressBook\n " + 
-            		"6. To serach the Person by city Name\n 7. To serach the Person by state Name\n. 0. to exit");
-            Scanner scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    multiAddressBook.addAddressBook();
-                    break;
-                case 2:
-                    multiAddressBook.addressBookFunctions();
-                    break;
-                case 3:
-                    multiAddressBook.deleteBook();
-                    break;
-                case 4:
-                    multiAddressBook.printBook();
-                    break;
-                case 5:
-                    multiAddressBook.printContactsInBook();
-                    break;
-                case 6:
-                    System.out.println("Enter Name of City: ");
-                    String cityName = scanner.next();
-                    multiAddressBook.searchPersonByCity();
-                    break;
-                case 7: 
-                    System.out.println("Enter Name of State: ");
-                    String stateName = scanner.next();
-                    multiAddressBook.searchPersonByCity();
-                    break;
-                case 0:
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Enter the wrong input");
-            }
-        }
-    }
-    public static void main(String[] args) {
-        AddressBookMain addressBookMain = new AddressBookMain();
-        addressBookMain.choose();
-    }
-}
+	public static void main(String[] args) {
+	    	Scanner scan = new Scanner(System.in);
+	        System.out.println("Welcome to Address Book Program");
+	       AddressBook addressBook = new AddressBook();
+	        boolean choice = true;
+	        while (choice) {
+	            System.out.println("\nChoose the option:\nPress '1' for Add Contact Details\nPress '2' for Edit Contact Deatils"
+	                    + "\nPress '3' for Delete Contact Details\nPress '4' for Show Contact Details\nPress '5' for Contact list by City State"
+	                    + "\nPress '6' for Show Contact list of Persons\nPress '7' for Count of contacts by City State\nPress '8' for Sort Contacts By Name"
+	                    + "\nPress '0' for Exit");
+	            int option = scan.nextInt();
+	            switch (option) {
+	                case 0:
+	                    choice = false;
+	                    System.out.println("Exited out of AddressBook");
+	                    break;
+	                case 1:
+	                    addressBook.addDetails();
+	                    break;
+	                case 2:
+	                    addressBook.editDetails();
+	                    break;
+	                case 3:
+	                    addressBook.deleteDetails();
+	                    break;
+	                case 4:
+	                    addressBook.showDetails();
+	                    break;
+	                case 5:
+	                    addressBook.contactBycity();
+	                    break;
+	                case 6:
+	                    addressBook.displayContacts();
+	                    break;
+	                case 7:
+	                    addressBook.contactsCount();
+	                    break;
+	                case 8:
+	                    addressBook.sorting();
+	                    break;
+	                default:
+	                    System.out.println("Please enter valid input");
+	            }
+	        }
+	    }
+	}
